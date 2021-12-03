@@ -65,19 +65,24 @@ class TestGame:
                 self.air_time = 0
 
     def scroll_image(self):
-        self.background_sky_rect1[0] -= 2
-        self.background_sky_rect2[0] -= 2
 
-        self.background_clouds_rect1[0] -= 5
-        self.background_clouds_rect2[0] -= 5
+        self.background_sky_rect1[0] -= int(self.time_passed * 0.05)
+        self.background_sky_rect2[0] -= int(self.time_passed * 0.05)
 
-        self.background_buildings_rect1[0] -= 5
-        self.background_buildings_rect2[0] -= 5
+        self.background_clouds_rect1[0] -= int(self.time_passed * 0.15)
+        self.background_clouds_rect2[0] -= int(self.time_passed * 0.15)
 
-        self.background_streets_rect1[0] -= 10
-        self.background_streets_rect2[0] -= 10
+        self.background_buildings_rect1[0] -= int(self.time_passed * 0.15)
+        self.background_buildings_rect2[0] -= int(self.time_passed * 0.15)
+
+
+        street_moving = int(self.time_passed * 0.2)
+
+        self.background_streets_rect1[0] -= street_moving
+        self.background_streets_rect2[0] -= street_moving
 
     def border_patrol(self):
+
         if self.background_sky_rect1[0] <= -self.background_sky_rect1[2]:
             self.background_sky_rect1[0] = self.background_sky_rect2[0] + self.background_sky_rect2[2]
         elif self.background_sky_rect2[0] <= -self.background_sky_rect2[2]:
@@ -104,13 +109,14 @@ class TestGame:
 
         pygame.init()
         pygame.display.set_caption("Dodo Jump")
-        self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), pygame.OPENGL, 32)
+        self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
         clock = pygame.time.Clock()
         self.game_is_running = True
 
         while self.game_is_running:
             # limit framespeed to 30fps
-            self.time_passed = clock.tick(60)
+            self.time_passed = clock.tick(25)
+            print(self.time_passed)
             if not self.dodo_is_grounded:
                 self.air_time += self.time_passed
 
