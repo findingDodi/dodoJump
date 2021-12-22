@@ -57,7 +57,6 @@ class TestGame:
                 self.dodo_is_grounded = False
                 self.last_event = None
 
-        #print(self.air_time)
         if self.air_time > 1000:
             if self.dodo_position_y < self.dodo_max_position_y:
                 self.dodo_position_y += 20
@@ -75,11 +74,8 @@ class TestGame:
         self.background_buildings_rect1[0] -= int(self.time_passed * 0.15)
         self.background_buildings_rect2[0] -= int(self.time_passed * 0.15)
 
-
-        street_moving = int(self.time_passed * 0.2)
-
-        self.background_streets_rect1[0] -= street_moving
-        self.background_streets_rect2[0] -= street_moving
+        self.background_streets_rect1[0] -= int(self.time_passed * 0.2)
+        self.background_streets_rect2[0] -= int(self.time_passed * 0.2)
 
     def border_patrol(self):
 
@@ -104,12 +100,12 @@ class TestGame:
             self.background_streets_rect2[0] = self.background_streets_rect1[0] + self.background_streets_rect1[2]
 
     def run_game(self):
-        SCREENWIDTH = conf.SCREEN_SIZE[0]
-        SCREENHEIGHT = conf.SCREEN_SIZE[1]
+        screen_width = conf.SCREEN_SIZE[0]
+        screen_height = conf.SCREEN_SIZE[1]
 
         pygame.init()
         pygame.display.set_caption("Dodo Jump")
-        self.screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
+        self.screen = pygame.display.set_mode((screen_width, screen_height), 0, 32)
         clock = pygame.time.Clock()
         self.game_is_running = True
 
