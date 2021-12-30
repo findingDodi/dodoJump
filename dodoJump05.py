@@ -143,7 +143,6 @@ class TestGame:
         if self.dodo_rect.colliderect(self.trashcan_rect) or self.dodo_rect.colliderect(self.trashcan_rect2):
             self.game_stopped = True
 
-
     def draw_game_over_screen(self):
         if self.game_stopped == True:
             font = pygame.font.SysFont('ComicNeue-Regular', 40)
@@ -152,12 +151,17 @@ class TestGame:
             self.screen.fill((55, 55, 55), self.background_rect)
             self.screen.blit(font.render('GAME OVER', True, font_color), font_position)
 
-
     def show_score(self):
         font = pygame.font.SysFont('ComicNeue', 40)
         font_color = (255, 255, 255)
         font_position = (10, 10)
         self.screen.blit(font.render(str(self.score), True, font_color), font_position)
+
+    def restart_game(self):
+        if self.game_stopped == True:
+            self.trashcan_rect[0] = conf.SCREEN_SIZE[1] - 20
+            self.trashcan_rect2[0] = conf.SCREEN_SIZE[1] + 1000
+            self.game_stopped = False
 
     # Hauptfunktion, in der das Spiel läuft
     def run_game(self):
@@ -210,6 +214,8 @@ class TestGame:
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.game_is_running = False
+                    elif event.key == pygame.K_r:
+                        self.restart_game()
                     else:
                         self.dodo_control(event)
 
