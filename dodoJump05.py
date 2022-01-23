@@ -5,7 +5,7 @@ import random
 
 class TestGame:
 
-    # Funktion zur Initialisierung der Instanzvariablen aka Construktor
+    # Funktion zur Initialisierung der Instanzvariablen aka Constructor
     def __init__(self):
         self.screen = None
         self.game_is_running = True
@@ -219,7 +219,7 @@ class TestGame:
                     else:
                         self.dodo_control(event)
 
-            self.draw_box()
+            #self.draw_box()
             # final draw
             pygame.display.flip()
 
